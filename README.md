@@ -43,6 +43,6 @@ python train_eager.py --epochs 0
 python train_eager.py --epochs 500 --dataset path_to_dataset  --model_path path_to_model  --batch_size 8
 ```
 
-Wehre [path_to_dataset] is the path to the downloaded dataset (uncompressed) and [path_to_model] is the path where the weights are going to be saved
+Where [path_to_dataset] is the path to the downloaded dataset (uncompressed) and [path_to_model] is the path where the weights are going to be saved
 
  
