@@ -31,6 +31,9 @@ Our dataset is a subset of the [DDD17: DAVIS Driving Dataset](http://sensors.ini
 
 [Download it here](https://drive.google.com/open?id=1Ug6iZc7WYQWCklxwcemCeyw3CPyuuxJf)
 
+The semantic segmentation labels of the data are:
+flat:0, construction+sky:1, object:2,  nature:3,  human:4, vehicle:5, ignore_labels:255
+
 
 ## Replicate results
 For testing the pre-trained model just execute:
