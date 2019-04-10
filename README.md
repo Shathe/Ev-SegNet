@@ -1,4 +1,4 @@
-# Event-Based-Learning
+# Ev-SegNet
 
 This work proses an approach for learning semantic segmentation from only event-based information (event-based cameras).
 
