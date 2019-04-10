@@ -1,7 +1,8 @@
 # Event-Based-Learning
 
 This work proses an approach for learning semantic segmentation from only event-based information (event-based cameras).
-[Paper](https://drive.google.com/file/d/1eTX6GXy5qP9I4PWdD4MkRRbEtfg65XCr/view?usp=sharing)
+
+For more details, here is the [Paper](https://drive.google.com/file/d/1eTX6GXy5qP9I4PWdD4MkRRbEtfg65XCr/view?usp=sharing)
 
 # Requirements
 * Python 2.7+
