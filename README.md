@@ -4,6 +4,8 @@ This work proses an approach for learning semantic segmentation from only event-
 
 For more details, here is the [Paper](https://drive.google.com/file/d/1eTX6GXy5qP9I4PWdD4MkRRbEtfg65XCr/view?usp=sharing)
 
+**[This repository contains the basic and the core implementation and data from the paper. It will be updated with more detail with the time]**
+
 # Requirements
 * Python 2.7+
 * Tensorflow 1.11
