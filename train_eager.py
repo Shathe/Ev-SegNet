@@ -66,8 +66,8 @@ def train(loader, model, epochs=5, batch_size=2, show_loss=False, augmenter=None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", help="Dataset path", default='/home/leon/Downloads/dataset_our_codification')
-    parser.add_argument("--model_path", help="Model path", default='weights/eventos_6_channels')
+    parser.add_argument("--dataset", help="Dataset path", default='dataset_our_codification')
+    parser.add_argument("--model_path", help="Model path", default='weights/model')
     parser.add_argument("--n_classes", help="number of classes to classify", default=6)
     parser.add_argument("--batch_size", help="batch size", default=8)
     parser.add_argument("--epochs", help="number of epochs to train", default=500)
