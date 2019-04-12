@@ -15,7 +15,7 @@ For more details, here is the [Paper](https://drive.google.com/file/d/1eTX6GXy5q
 * Sklearn
 
 
-## Citing Multi-Level Superpixels 
+## Citing Ev-SegNet 
 
 If you find EV-SegNet useful in your research, please consider citing:
 ``` 
