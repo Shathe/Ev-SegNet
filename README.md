@@ -1,5 +1,7 @@
 # Ev-SegNet
 
+[![Ev-SegNet](utils/image.png)](https://youtu.be/YQXBjWUSiaA)
+
 This work proses an approach for learning semantic segmentation from only event-based information (event-based cameras).
 
 For more details, here is the [Paper](https://drive.google.com/file/d/1eTX6GXy5qP9I4PWdD4MkRRbEtfg65XCr/view?usp=sharing)
