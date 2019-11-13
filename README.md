@@ -54,4 +54,9 @@ python train_eager.py --epochs 500 --dataset path_to_dataset  --model_path path_
 
 Where [path_to_dataset] is the path to the downloaded dataset (uncompressed) and [path_to_model] is the path where the weights are going to be saved
 
+## Get new labels
+
+First, download [this folder](https://drive.google.com/drive/folders/1NjTGAoSCpYw_l89l1BdulJi0B_qIIiin?usp=sharing) and copy it into the weights folder of this repository (so that you have weights/cityscapes_grasycale folder).
+
+Then...
  
