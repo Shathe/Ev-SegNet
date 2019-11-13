@@ -63,6 +63,7 @@ class Segception(tf.keras.Model):
         return x
 
 
+
 class Segception_v2(tf.keras.Model):
     def __init__(self, num_classes, input_shape=(None, None, 3), weights='imagenet', **kwargs):
         super(Segception_v2, self).__init__(**kwargs)
@@ -129,6 +130,63 @@ class Segception_v2(tf.keras.Model):
         else:
             return x
 
+
+
+class Segception_v4(tf.keras.Model):
+    def __init__(self, num_classes, input_shape=(None, None, 3), weights='imagenet', **kwargs):
+        super(Segception_v4, self).__init__(**kwargs)
+        base_model = tf.keras.applications.xception.Xception(include_top=False, weights=weights,
+                                                             input_shape=input_shape, pooling='avg')
+        output_1 = base_model.get_layer('block2_sepconv2_bn').output
+        output_2 = base_model.get_layer('block3_sepconv2_bn').output
+        output_3 = base_model.get_layer('block4_sepconv2_bn').output
+        output_4 = base_model.get_layer('block13_sepconv2_bn').output
+        output_5 = base_model.get_layer('block14_sepconv2_bn').output
+        outputs = [output_5, output_4, output_3, output_2, output_1]
+
+        self.model_output = tf.keras.Model(inputs=base_model.input, outputs=outputs)
+
+        # Decoder
+        self.adap_encoder_1 = EncoderAdaption(filters=256, kernel_size=3, dilation_rate=1)
+        self.adap_encoder_2 = EncoderAdaption(filters=256, kernel_size=3, dilation_rate=1)
+        self.adap_encoder_3 = EncoderAdaption(filters=256, kernel_size=3, dilation_rate=1)
+        self.adap_encoder_4 = EncoderAdaption(filters=128, kernel_size=3, dilation_rate=1)
+        self.adap_encoder_5 = EncoderAdaption(filters=64, kernel_size=3, dilation_rate=1)
+
+        self.decoder_conv_1 = FeatureGeneration(filters=256, kernel_size=3, dilation_rate=1, blocks=2)
+        self.decoder_conv_2 = FeatureGeneration(filters=128, kernel_size=3, dilation_rate=1, blocks=2)
+        self.decoder_conv_3 = FeatureGeneration(filters=64, kernel_size=3, dilation_rate=1, blocks=2)
+        self.decoder_conv_4 = FeatureGeneration(filters=32, kernel_size=3, dilation_rate=1, blocks=2)
+
+        self.conv_logits = conv(filters=num_classes, kernel_size=1, strides=1, use_bias=True)
+
+    def call(self, inputs, training=None, mask=None, aux_loss=False):
+
+        outputs = self.model_output(inputs, training=training)
+        # add activations to the ourputs of the model
+        for i in range(len(outputs)):
+            outputs[i] = layers.LeakyReLU(alpha=0.3)(outputs[i])
+
+        x = self.adap_encoder_1(outputs[0], training=training)
+        x = upsampling(x, scale=2)
+        x += reshape_into(self.adap_encoder_2(outputs[1], training=training), x)  # 512
+        x = self.decoder_conv_1(x, training=training)  # 256
+
+        x = upsampling(x, scale=2)
+        x += reshape_into(self.adap_encoder_3(outputs[2], training=training), x)  # 256
+        x = self.decoder_conv_2(x, training=training)  # 256
+
+        x = upsampling(x, scale=2)
+        x += reshape_into(self.adap_encoder_4(outputs[3], training=training), x)  # 128
+        x = self.decoder_conv_3(x, training=training)  # 128
+
+        x = upsampling(x, scale=2)
+        x += reshape_into(self.adap_encoder_5(outputs[4], training=training), x)  # 64
+        x = self.decoder_conv_4(x, training=training)  # 64
+        x = self.conv_logits(x)
+        x = upsampling(x, scale=2)
+
+        return x
 
 
 class Segception_small(tf.keras.Model):
