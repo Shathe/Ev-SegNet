@@ -58,5 +58,9 @@ Where [path_to_dataset] is the path to the downloaded dataset (uncompressed) and
 
 First, download [this folder](https://drive.google.com/drive/folders/1NjTGAoSCpYw_l89l1BdulJi0B_qIIiin?usp=sharing) and copy it into the weights folder of this repository (so that you have weights/cityscapes_grasycale folder).
 
-Then...
+Then execute this script specifying the grayscale image path to obtain the labels from.
  
+```
+python get_segmentation.py --image_path ./image.png --weights/cityscapes_grayscale
+```
+
